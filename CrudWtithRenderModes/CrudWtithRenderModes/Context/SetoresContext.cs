@@ -9,6 +9,6 @@ namespace CrudWtithRenderModes.Context
         {
 
         }
-       public DbSet<SetoresContext> Setores{ get; set; }
+       public DbSet<Setores> Setores{ get; set; }
     }
 }

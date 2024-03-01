@@ -15,30 +15,55 @@ namespace CrudWtithRenderModes.Repositories
             _context = context;
         }
 
-        public  Task<Setores> AddSetoresAsync(Setores model)
+        public  async Task<Setores> AddSetoresAsync(Setores model)
         {
-            throw new NotImplementedException();
+            if (model is null) return null!;
+
+            var check = await _context.Setores.Where(x => x.NomeMaquina.ToLower().Equals(model.NomeMaquina.ToLower())).FirstOrDefaultAsync();
+            if (check is not null) return null!;
+
+            var novoSetor = _context.Setores.Add(model).Entity;
+            await _context.SaveChangesAsync();
+            return novoSetor;
 
         }
 
-        public Task<Setores> DeleteSetoresAsync(int setoresId)
+        public async Task<Setores> DeleteSetoresAsync(int setoresId)
         {
-            throw new NotImplementedException();
+            var setor = await _context.Setores.FirstOrDefaultAsync(x => x.Id == setoresId);
+
+            if (setor is null) return null!;
+
+            await _context.SaveChangesAsync();
+            return setor;
         }
 
-        public Task<List<Setores>> GetAllSetoresAsync()
+        public async Task<List<Setores>> GetAllSetoresAsync()
         {
-            throw new NotImplementedException();
+           return await _context.Setores.ToListAsync();
         }
 
-        public Task<Setores> GetSetoresByIdAsync(int setoresId)
+        public async Task<Setores> GetSetoresByIdAsync(int setoresId)
         {
-            throw new NotImplementedException();
+            var setor = await _context.Setores.FirstOrDefaultAsync(x => x.Id == setoresId);
+
+            if (setor is null) return null!;
+
+            return setor;
         }
 
-        public Task<Setores> UpdateSetoresAsync(Setores model)
+        public async Task<Setores> UpdateSetoresAsync(Setores model)
         {
-            throw new NotImplementedException();
+            var setor = await _context.Setores.FirstOrDefaultAsync(x => x.Id == model.Id);
+
+            if (setor is null) return null!;
+
+            setor.NomeMaquina = model.NomeMaquina;
+            setor.PontoDeAtendimento = model.PontoDeAtendimento;
+
+            await _context.SaveChangesAsync();
+
+            return await _context.Setores.FirstOrDefaultAsync(x => x.Id == model.Id);
         }
     }
 }
