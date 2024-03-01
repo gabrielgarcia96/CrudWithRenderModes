@@ -1,7 +1,6 @@
 ﻿using CrudWithRenderModes.Shared.Entities;
 using CrudWithRenderModes.Shared.Interfaces;
 using System.Net.Http.Json;
-using System.Reflection;
 using System.Text.Json;
 
 namespace CrudWtithRenderModes.Client.Services

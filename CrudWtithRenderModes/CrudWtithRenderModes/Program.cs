@@ -5,6 +5,7 @@ using CrudWtithRenderModes.Context;
 using CrudWtithRenderModes.Repositories;
 using Microsoft.EntityFrameworkCore;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,10 +13,11 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration
+                              .GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<SetoresContext>(opt => opt.UseSqlite(connectionString));
-
+builder.Services.AddDbContext<SetoresContext>(opt =>
+                   opt.UseSqlite(connectionString));
 
 builder.Services.AddScoped<ISetoresRepository, SetoresRepositories>();
 
