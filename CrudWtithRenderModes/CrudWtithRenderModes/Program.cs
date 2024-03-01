@@ -1,6 +1,8 @@
+using CrudWithRenderModes.Shared.Interfaces;
 using CrudWtithRenderModes.Client.Pages;
 using CrudWtithRenderModes.Components;
 using CrudWtithRenderModes.Context;
+using CrudWtithRenderModes.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,15 @@ builder.Services.AddRazorComponents()
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<SetoresContext>(opt => opt.UseSqlite(connectionString));
+
+
+builder.Services.AddScoped<ISetoresRepository, SetoresRepositories>();
+
+builder.Services.AddScoped(http => new HttpClient
+{
+    BaseAddress = new Uri(builder.Configuration.GetSection("BaseAddress").Value!)
+});
+
 
 var app = builder.Build();
 
