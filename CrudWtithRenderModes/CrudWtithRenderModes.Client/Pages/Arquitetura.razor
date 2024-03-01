@@ -1,0 +1,102 @@
+﻿@page "/arquitetura"
+@rendermode InteractiveServer
+
+
+<h1>Operação de Setores</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card">
+                    <div class="card-header">
+                        <button class="btn btn-primary float-end"
+                                @onclick="NavigateToAddClientePage">
+                            Novo Cliente
+                        </button>
+                    </div>
+                </div>
+                @if (setores.Count > 0)
+                {
+                    <div class="card-header">
+                        Lista de clientes
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var setor in setores)
+                                {
+                                    <tr>
+                                        <td>@setor.Id</td>
+                                        <td>@setor.Empresa</td>
+                                        <td>@setor.Equipes</td>
+                                        <td>@setor.NomeMaquina</td>
+                                        <td>@setor.PontoDeAtendimento</td>
+                                        <td>
+                                            <div class="hstack gap-2">
+                                                <button class="btn  btn-info" @onclick="()=>Edit(setor)"> Edita</button>
+                                                <button class="btn  btn-danger" @onclick="() => Delete(setor.Id)"> Deleta</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info"> Nenhum cliente disponível </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<Setores> setores { get; set; } = new();
+
+    private async Task CarregaSetores()
+    {
+        var clientes = await _setorService.GetAllSetoresAsync();
+
+        setores?.Clear();
+
+        if (setores is null) return;
+
+        foreach (var cliente in clientes)
+            setores.Add(cliente);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CarregaSetores();
+    }
+
+    //incluir
+    private void NavigateToAddClientePage()
+    {
+        _navigation.NavigateTo("manutencaosetor");
+    }
+
+    //editar
+    private void Edit(Setores model)
+    {
+        _navigation.NavigateTo($"manutencaosetor/{model.Id}");
+    }
+
+    //deletar
+    private async Task Delete(int id)
+    {
+        var cliente = await _setorService.DeleteSetoresAsync(id);
+        await CarregaSetores();
+    }
+}

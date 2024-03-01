@@ -1,0 +1,78 @@
+﻿﻿@page "/manutencaocliente"
+@page "/manutencaocliente/{Id:int}"
+
+@rendermode InteractiveAuto
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">Manutenção</div>
+                <div class="card-body">
+                    <EditForm Model="setoresModel" OnValidSubmit="HandleSalvar" FormName="Setores">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                        <div class="form-group">
+                            <label class="form-label">Empresa</label>
+                            <InputText @bind-Value=".Nome" class="form-control"></InputText>
+                            <ValidationMessage For="()=>setoresModel.Empresa"></ValidationMessage>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Equipe</label>
+                            <InputText @bind-Value="setoresModel.Equipes" class="form-control"></InputText>
+                            <ValidationMessage For="()=>setoresModel.Equipes"></ValidationMessage>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nome Maquina</label>
+                            <InputNumber @bind-Value="setoresModel.NomeMaquina" class="form-control"></InputNumber>
+                            <ValidationMessage For="()=>setoresModel.NomeMaquina"></ValidationMessage>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Ponto de Atendimento</label>
+                            <InputNumber @bind-Value="setoresModel.PontoDeAtendimento" class="form-control"></InputNumber>
+                            <ValidationMessage For="()=>setoresModel.PontoDeAtendimento"></ValidationMessage>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mt-2"> Salvar</button>
+                    </EditForm>
+                </div>
+
+                <div class="card-footer">
+                    @* Id: @ReturnCliente.Id <br /> *@
+                    Empresa: @ReturnSetores.Empresa <br />
+                    Equipe: @ReturnSetores.Equipes
+                    Equipe: @ReturnSetores.NomeMaquina
+                    Equipe: @ReturnSetores.PontoDeAtendimento
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+
+    public Setores setoresModel { get; set; } = new();
+    [Parameter] public int Id { get; set; }
+
+    private Setores ReturnSetores = new();
+
+    private async Task HandleSalvar()
+    {
+        if (setoresModel.Id > 0)
+        {
+            ReturnSetores = await _setorService.UpdateClienteAsync(setoresModel);
+            setoresModel = new();
+        }
+        else
+        {
+            ReturnSetores = await _setorService.AddClienteAsync(setoresModel);
+            setoresModel = new();
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Id > 0)
+            setoresModel = await _setorService.GetClienteByIdAsync(Id);
+    }
+}

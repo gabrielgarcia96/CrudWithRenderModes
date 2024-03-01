@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudWtithRenderModes", "CrudWtithRenderModes\CrudWtithRenderModes\CrudWtithRenderModes.csproj", "{42541DC8-7570-4DEB-9A21-D7AE3F6BC173}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudWtithRenderModes", "CrudWtithRenderModes\CrudWtithRenderModes\CrudWtithRenderModes.csproj", "{42541DC8-7570-4DEB-9A21-D7AE3F6BC173}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EA9A87F0-3CFC-49BD-B0C1-8ABAB21FCBF9} = {EA9A87F0-3CFC-49BD-B0C1-8ABAB21FCBF9}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudWtithRenderModes.Client", "CrudWtithRenderModes\CrudWtithRenderModes.Client\CrudWtithRenderModes.Client.csproj", "{DA2D2ABD-B0EB-4BDC-9F1E-2CD574FC6BC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudWtithRenderModes.Client", "CrudWtithRenderModes\CrudWtithRenderModes.Client\CrudWtithRenderModes.Client.csproj", "{DA2D2ABD-B0EB-4BDC-9F1E-2CD574FC6BC6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EA9A87F0-3CFC-49BD-B0C1-8ABAB21FCBF9} = {EA9A87F0-3CFC-49BD-B0C1-8ABAB21FCBF9}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudWithRenderModes.Shared", "CrudWithRenderModes.Shared\CrudWithRenderModes.Shared.csproj", "{EA9A87F0-3CFC-49BD-B0C1-8ABAB21FCBF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudWithRenderModes.Shared", "CrudWithRenderModes.Shared\CrudWithRenderModes.Shared.csproj", "{EA9A87F0-3CFC-49BD-B0C1-8ABAB21FCBF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
